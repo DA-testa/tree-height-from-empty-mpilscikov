@@ -42,6 +42,9 @@ def main():
         number_of_elements = int(input())
         elements = list(map(int, input().split()))
 
+        tree_height = compute_height(number_of_elements, elements)
+        print(tree_height)
+
     elif input_type == 'F':
         file_name = input()
 
@@ -51,8 +54,8 @@ def main():
             number_of_elements = int(rows[0].replace('\n', ''))
             elements = list(map(int, input().replace('\n', '').split()))
 
-    tree_height = compute_height(number_of_elements, elements)
-    print(tree_height)
+            tree_height = compute_height(number_of_elements, elements)
+            print(tree_height)
 
 
 sys.setrecursionlimit(10**7)
