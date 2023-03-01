@@ -30,11 +30,11 @@ def compute_height(n, parents):
 def main():
     input_type = input()
 
-    if input_type == 'I':
+    if 'I' in input_type:
         number_of_elements = int(input())
         elements = list(map(int, input().split()))
 
-    elif input_type == 'F':
+    elif 'F' in input_type:
         file_name = input()
         if a in file_name:
             raise Exception('a in filename')
