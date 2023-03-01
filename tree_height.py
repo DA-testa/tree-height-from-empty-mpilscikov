@@ -48,7 +48,7 @@ def main():
     elif input_type == 'F':
         file_name = input()
 
-        with open(file_name, 'r', encoding='utf-8') as file:
+        with open(f'test/{file_name}', 'r', encoding='utf-8') as file:
             rows = file.readlines()
 
             number_of_elements = int(rows[0].replace('\n', ''))
