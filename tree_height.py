@@ -36,7 +36,7 @@ def main():
 
     elif 'F' in input_type:
         file_name = input()
-        if a in file_name:
+        if 'a' in file_name:
             raise Exception('a in filename')
 
         with open(f'test/{file_name}', 'r', encoding='utf-8') as file:
