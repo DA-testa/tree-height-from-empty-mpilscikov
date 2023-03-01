@@ -1,37 +1,29 @@
 import sys
 import threading
 
+import numpy
 import numpy as np
 
 
-def populate_tree_array(n, parents):
-    tree = np.zeros((n, n), dtype=int)
+def set_height(heights, parents, i):
+    if heights[i] != 0:
+        return heights[i]
 
-    for i in range(n):
-        if parents[i] != -1:
-            tree[parents[i], i] = 1
-            tree[i, parents[i]] = 1
+    if parents[i] == -1:
+        heights[i] = 1
+    else:
+        heights[i] = set_height(heights, parents, parents[i]) + 1
 
-    return tree
-
-
-def get_tree_height(root, n, parents, tree):
-    if not np.sum(tree[root]):
-        return 1
-
-    height = 0
-    for i in range(n):
-        if tree[root, i] and parents[root] != i:
-            height = max(height, get_tree_height(i, n, parents, tree))
-
-    return height + 1
+    return heights[i]
 
 
 def compute_height(n, parents):
-    tree = populate_tree_array(n, parents)
-    root = parents.index(-1)
-    max_height = get_tree_height(root, n, parents, tree)
+    heights = np.zeros(n)
 
+    for i in range(n):
+        set_height(heights, parents, i)
+
+    max_height = int(max(heights))
     return max_height
 
 
@@ -42,20 +34,20 @@ def main():
         number_of_elements = int(input())
         elements = list(map(int, input().split()))
 
-        tree_height = compute_height(number_of_elements, elements)
-        print(tree_height)
-
     elif input_type == 'F':
         file_name = input()
+        if a in file_name:
+            raise Exception('a in filename')
 
         with open(f'test/{file_name}', 'r', encoding='utf-8') as file:
-            rows = file.readlines()
-
             number_of_elements = int(file.readline())
             elements = list(map(int, file.readline().split()))
 
-            tree_height = compute_height(number_of_elements, elements)
-            print(tree_height)
+    else:
+        raise Exception('wrong input')
+
+    tree_height = compute_height(number_of_elements, elements)
+    print(tree_height)
 
 
 sys.setrecursionlimit(10**7)
