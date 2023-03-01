@@ -51,8 +51,8 @@ def main():
         with open(f'test/{file_name}', 'r', encoding='utf-8') as file:
             rows = file.readlines()
 
-            number_of_elements = int(rows[0].replace('\n', ''))
-            elements = list(map(int, input().replace('\n', '').split()))
+            number_of_elements = int(file.readline())
+            elements = list(map(int, file.readline().split()))
 
             tree_height = compute_height(number_of_elements, elements)
             print(tree_height)
